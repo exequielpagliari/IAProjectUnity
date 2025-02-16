@@ -1,0 +1,18 @@
+Idle State:
+
+- WaitTime
+
+To:
+
+- Patrol State
+- Relax State
+
+Patrol State:
+
+- WaitTime
+- Points Patrol
+
+To:
+
+- Idle State
+
