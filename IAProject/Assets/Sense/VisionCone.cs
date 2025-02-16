@@ -49,7 +49,7 @@ public class VisionCone : MonoBehaviour
             {
                 Debug.Log("Player Detected");
                 //if(npc.StateMachine.CurrentState == npc.StateMachine.patrolState || npc.StateMachine.CurrentState == npc.StateMachine.idleState)
-                npc.SetAlertState(hit.point);
+                npc.SetAggressiveState(npc.ObtainPlayerPosition().transform.position);
             }
         }
     }

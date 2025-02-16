@@ -29,7 +29,7 @@ public class AlertState : IState
     }
     public void Exit()
     {
-        Debug.Log("Exit Idle State");
+        Debug.Log("Exit Alert State");
         // code that runs when we exit the state
     }
 }

@@ -33,6 +33,18 @@ namespace DesignPatterns.StateNPC
         [Range(0f, 120f)]
         float timeStopLazzyTimeMin;
 
+
+        [SerializeField]
+        [Range(0f,5f)]
+        float maxShootRange = 5;
+
+        [SerializeField]
+        [Range(0f, 5f)]
+        float fireRate = 3f;
+
+        [SerializeField]
+        public GameObject gunTransform;
+
         public StateMachine StateMachine => stateMachine;
 
         public Animator animator;
@@ -56,6 +68,7 @@ namespace DesignPatterns.StateNPC
         {
             stateMachine.Initialize(stateMachine.idleState);
             navMeshAgent.destination = GetPointPatrol().position;
+            player = GameObject.FindGameObjectWithTag("Player");
 
         }
 
@@ -134,6 +147,18 @@ namespace DesignPatterns.StateNPC
             navMeshAgent.destination = location;
             stateMachine.Initialize(stateMachine.alertState);
         }
+
+        public void SetAggressiveState(Vector3 location)
+        {
+            navMeshAgent.destination = player.transform.position;
+            stateMachine.Initialize(stateMachine.aggressiveState);
+        }
+
+        public float GetFireRate()
+            { return fireRate; }
+
+        public float GetMaxShotRange()
+        { return maxShootRange; }
     }
 
 

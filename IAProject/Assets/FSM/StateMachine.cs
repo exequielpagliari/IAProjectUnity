@@ -10,6 +10,7 @@ public class StateMachine
     public PatrolState patrolState;
     public IdleState idleState;
     public AlertState alertState;
+    public AggressiveState aggressiveState;
 
     // pass in necessary parameters into constructor 
     public StateMachine(NPCController npc)
@@ -18,6 +19,7 @@ public class StateMachine
         this.patrolState = new PatrolState(npc);
         this.idleState = new IdleState(npc);
         this.alertState = new AlertState(npc);
+        this.aggressiveState = new AggressiveState(npc);
 
     }
     public void Initialize(IState startingState)
