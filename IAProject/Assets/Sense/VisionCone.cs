@@ -54,7 +54,10 @@ public class VisionCone : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Player Detected");
-                npc.SetAggressiveState(npc.ObtainPlayerPosition().transform.position);
+                if(npc.StateMachine.CurrentState != npc.StateMachine.aggressiveState)
+                    npc.SetAggressiveState(npc.ObtainPlayerPosition().transform.position);
+                else
+                    npc.StateMachine.aggressiveState.RestartTimeLapsed();
             }
             else
             {
