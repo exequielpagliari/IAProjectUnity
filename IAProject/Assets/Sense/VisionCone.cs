@@ -7,7 +7,7 @@ public class VisionCone : MonoBehaviour
     [SerializeField] private float visionRange = 10f;
     [SerializeField] private float frequencyDetect = 2f;
     [SerializeField] private GameObject eyes; // Altura desde donde lanza el Raycast
-    [SerializeField] private LayerMask playerLayerMask;
+
 
     private GameObject player;
     private NPCController npc;
@@ -32,8 +32,7 @@ public class VisionCone : MonoBehaviour
     void CheckForPlayer()
     {
         if (player == null) return;
-
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = npc.ObtainPlayerPosition().transform.position - transform.position;
         float distanceSqr = direction.sqrMagnitude; // Optimización: usa cuadrado de la distancia
 
         if (distanceSqr > visionRange * visionRange) return; // Si está fuera del rango, salir
@@ -41,18 +40,30 @@ public class VisionCone : MonoBehaviour
         float angle = Vector3.Angle(transform.forward, direction);
         if (angle > visionAngle / 2) return; // Si está fuera del cono de visión, salir
 
-        Vector3 rayOrigin = eyes.transform.position; // Raycast desde la "cabeza"
+
+        Vector3 rayOrigin = eyes.transform.position; // Posición de los ojos
+
+
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin, direction.normalized, out hit, visionRange,playerLayerMask))
+
+        // Debug para ver la línea en la Scene View
+        Debug.DrawRay(rayOrigin, direction * visionRange, Color.red, 0.1f);
+
+        if (Physics.Raycast(rayOrigin, direction, out hit, visionRange))
         {
             if (hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Player Detected");
-                //if(npc.StateMachine.CurrentState == npc.StateMachine.patrolState || npc.StateMachine.CurrentState == npc.StateMachine.idleState)
                 npc.SetAggressiveState(npc.ObtainPlayerPosition().transform.position);
             }
+            else
+            {
+                Debug.Log("Obstáculo bloqueando la vista: " + hit.collider.name);
+            }
         }
+
     }
+
 
     // Dibujar el cono de visión en la Scene View
     void OnDrawGizmos()

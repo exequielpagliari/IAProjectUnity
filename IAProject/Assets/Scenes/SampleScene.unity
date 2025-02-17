@@ -326,7 +326,7 @@ Transform:
   m_GameObject: {fileID: 121530890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0.564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1641,9 +1641,6 @@ MonoBehaviour:
   visionRange: 5
   frequencyDetect: 2
   eyes: {fileID: 121530890}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1403493715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,9 +1657,6 @@ MonoBehaviour:
   visionRange: 15
   frequencyDetect: 1.5
   eyes: {fileID: 121530890}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1403493716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,9 +1673,6 @@ MonoBehaviour:
   visionRange: 12
   frequencyDetect: 1.5
   eyes: {fileID: 121530890}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1403493717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,9 +1689,6 @@ MonoBehaviour:
   visionRange: 7.5
   frequencyDetect: 2
   eyes: {fileID: 121530890}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1403493718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,9 +1705,6 @@ MonoBehaviour:
   visionRange: 1
   frequencyDetect: 1.5
   eyes: {fileID: 121530890}
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &1456768601
 GameObject:
   m_ObjectHideFlags: 0

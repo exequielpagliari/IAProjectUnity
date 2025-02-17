@@ -29,6 +29,7 @@ public class AggressiveState : IState
     }
     public void Update()
     {
+        npc.GetComponent<NavMeshAgent>().destination = npc.ObtainPlayerPosition().position;
         if (timeLapsed < Time.time)
             npc.StateMachine.Initialize(npc.StateMachine.patrolState);
         // Here we add logic to detect if the conditions exist to 
@@ -37,6 +38,7 @@ public class AggressiveState : IState
     public void Exit()
     {
         Debug.Log("Exit Idle State");
+        ShootAtPlayer();
         // code that runs when we exit the state
     }
 

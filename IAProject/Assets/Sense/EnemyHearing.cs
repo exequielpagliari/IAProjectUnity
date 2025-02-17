@@ -29,6 +29,7 @@ public class EnemyHearing : MonoBehaviour
     {
         Debug.Log("Enemigo escuchó algo y va a investigar");
         // Transición a estado de "Suspicious"
-        npc.SetAlertState(noisePosition);
+        if(npc.StateMachine.CurrentState != npc.StateMachine.aggressiveState)
+            npc.SetAlertState(noisePosition);
     }
 }
