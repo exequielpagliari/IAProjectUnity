@@ -30,16 +30,32 @@ public class AggressiveState : IState
     public void Update()
     {
         npc.GetComponent<NavMeshAgent>().destination = npc.ObtainPlayerPosition().position;
-        ShootAtPlayer();
+        
+        if((npc.ObtainPlayerPosition().transform.position - npc.transform.position).magnitude <= 2f)
+        { 
+            ShootAtPlayer();
+            npc.GetComponent<NavMeshAgent>().isStopped = true;
+
+        }
+
+        if ((npc.ObtainPlayerPosition().transform.position - npc.transform.position).magnitude > 4f)
+        {
+            npc.animator.SetBool("Aim", false);
+            npc.navMeshAgent.isStopped = false;
+        }
+
+
+
         if (timeLapsed < Time.time)
-            npc.StateMachine.Initialize(npc.StateMachine.patrolState);
+            npc.SetAlertState(npc.ObtainPlayerPosition().transform.position);
         // Here we add logic to detect if the conditions exist to 
         // transition to another state…
     }
     public void Exit()
     {
         Debug.Log("Exit Idle State");
-        
+        npc.animator.SetBool("Aim", false);
+
         // code that runs when we exit the state
     }
 
@@ -49,7 +65,9 @@ public class AggressiveState : IState
     { 
        if(Time.time > timeNextShot)
         {
-            npc.GetComponent<NavMeshAgent>().isStopped = true;
+            
+            npc.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+            npc.animator.SetBool("Aim", true);
             Debug.LogWarning("PosibleShot");
             Shoot();
             timeNextShot = Time.time + npc.GetFireRate();
@@ -67,6 +85,7 @@ public class AggressiveState : IState
             if (hit.collider.CompareTag("Player"))
             {
                 //player.TakeDamage(damageAmount);
+                npc.animator.SetTrigger("Shot");
                 Debug.LogWarning("HitPlayer");
                 hit.collider.gameObject.GetComponent<CharacterController>().Move(Vector3.zero);
             }

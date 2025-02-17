@@ -69,14 +69,15 @@ namespace DesignPatterns.StateNPC
             stateMachine.Initialize(stateMachine.idleState);
             navMeshAgent.destination = GetPointPatrol().position;
             player = GameObject.FindGameObjectWithTag("Player");
-
+            animator = GetComponentInChildren<Animator>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private void Update()
         {
             // update the current State
            stateMachine.Update();
-
+           animator.SetFloat("Speed",navMeshAgent.velocity.magnitude);
 
 
 
