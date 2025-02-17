@@ -18,6 +18,7 @@ public class AlertState : IState
         timeLapsed = Time.time + timeStop;
         npc.GetComponent<Renderer>().material.color = Color.yellow;
         npc.GetComponent<NavMeshAgent>().isStopped = false;
+
         // code that runs when we first enter the state
     }
     public void Update()

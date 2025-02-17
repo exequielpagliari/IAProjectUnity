@@ -1,3 +1,4 @@
+using BigRookGames.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,8 @@ namespace DesignPatterns.StateNPC
 
     public class NPCController : MonoBehaviour
     {
-
+        [SerializeField]
+        GunfireController WeaponController;
 
         private StateMachine stateMachine;
 
@@ -41,6 +43,12 @@ namespace DesignPatterns.StateNPC
         [SerializeField]
         [Range(0f, 5f)]
         float fireRate = 3f;
+
+        [SerializeField]
+        float maxSpeedPatrol = 3.5f;
+
+        [SerializeField]
+        float maxSpeedAggressive = 5f;
 
         [SerializeField]
         public GameObject gunTransform;
@@ -79,7 +87,10 @@ namespace DesignPatterns.StateNPC
            stateMachine.Update();
            animator.SetFloat("Speed",navMeshAgent.velocity.magnitude);
 
-
+            if (Input.GetKey(KeyCode.Space))
+            {
+                ShootRifle();
+            }
 
         }
 
@@ -160,7 +171,20 @@ namespace DesignPatterns.StateNPC
 
         public float GetMaxShotRange()
         { return maxShootRange; }
+
+
+        public void ShootRifle()
+        {
+            WeaponController.FireWeapon();
+        }
+
+        public float GetMaxSpeedAggressive()
+            { return maxSpeedAggressive; }
+
+        public float GetMaxSpeedPatrol()
+        {  return maxSpeedPatrol; }
     }
+
 
 
 }
